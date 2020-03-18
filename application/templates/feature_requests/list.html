@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>Title</th>
+    </tr>
+    {% for feature in feature_requests %}
+    <tr>
+        <td>{{ feature.title }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
