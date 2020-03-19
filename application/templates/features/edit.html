@@ -2,8 +2,18 @@
 
 {% block body %}
 <form method="POST" action="{{ url_for('features_edit', feature_id=feature.id)}}">
-    <input type="text" name="title" value="{{feature.title}}" />
-    <textarea rows="4" cols="50" name="description">{{feature.description}}</textarea>
-    <input type="submit" value="Submit" />
+    <div class="field">
+        <label class="label">Title</label>
+        <input class="input" type="text" name="title" value="{{feature.title}}" />
+    </div>
+    <div class="field">
+        <label class="label">Description</label>
+        <textarea class="textarea" name="description">{{feature.description}}</textarea>
+    </div>
+    <div class="field">
+        <div class="control">
+            <button class="button is-link" type="submit" value="Submit">Submit</button>
+        </div>
+    </div>
 </form>
 {% endblock %}

@@ -4,14 +4,24 @@
 <head>
     <meta charset="utf-8">
     <title>TodoApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css"
+        integrity="sha256-D9M5yrVDqFlla7nlELDaYZIpXfFWDytQtiV+TaH6F1I=" crossorigin="anonymous" />
 </head>
 
 <body>
-    {% block body %}
-    <p>
-        Content.
-    </p>
-    {% endblock %}
+    <div class="container">
+        {% include "navbar.html" %}
+    </div>
+    <section class="section">
+        <div class="container">
+            {% block body %}
+            <p>
+                Content.
+            </p>
+            {% endblock %}
+        </div>
+    </section>
+
 </body>
 
 </html>

@@ -1,15 +1,15 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<table>
-    <tr>
-        <th>Title</th>
-    </tr>
-    {% for feature in features %}
-    <tr>
-        <td>{{ feature.title }}</td>
-        <td><a href="{{ url_for('features_edit', feature_id=feature.id) }}">Edit</a></td>
-    </tr>
-    {% endfor %}
-</table>
+
+<h1 class="title">Feature request</h1>
+{% for feature in features %}
+<div>
+    <span class="subtitle">{{ feature.title }}</span>
+    <div>{{feature.description}}</div>
+    <a href="{{ url_for('features_edit', feature_id=feature.id) }}">Edit</a>
+    <hr>
+</div>
+{% endfor %}
+
 {% endblock %}
