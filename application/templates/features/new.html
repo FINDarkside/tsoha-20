@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('features_create') }}">
+  <input type="text" name="title"/>
+  <textarea rows="4" cols="50" name="description"></textarea>
+  <input type="submit" value="Add a new feature"/> 
+</form>
+{% endblock %}
