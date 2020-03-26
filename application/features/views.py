@@ -55,3 +55,11 @@ def features_create():
     db.session().commit()
 
     return redirect(url_for("features_index"))
+
+@app.route("/features/<feature_id>/delete", methods=["POST"])
+@login_required
+def features_delete(feature_id):
+    feature = Feature.query.get(feature_id)
+    db.session.delete(feature)
+    db.session.commit()
+    return redirect(url_for("features_index"))

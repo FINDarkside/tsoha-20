@@ -25,13 +25,13 @@ def auth_login():
     print(user.username + " logged in")
     login_user(user)
 
-    return redirect(url_for("index"))
+    return redirect(url_for("features_index"))
 
 
 @app.route("/auth/logout")
 def auth_logout():
     logout_user()
-    return redirect(url_for("index"))
+    return redirect(url_for("features_index"))
 
 
 @app.route("/auth/register", methods=["GET"])
@@ -50,4 +50,4 @@ def auth_register():
     db.session().commit()
     login_user(user)
     print(user.username + " created and logged in")
-    return redirect(url_for("index"))
+    return redirect(url_for("features_index"))
