@@ -10,12 +10,12 @@ def features_index():
 
 
 @app.route("/features/new/", methods=["GET"])
-def features_form():
+def features_new_form():
     return render_template("features/new.html", form=FeatureForm())
 
 
 @app.route("/features/<feature_id>/edit", methods=["GET"])
-def feature_requests_form(feature_id):
+def features_edit_form(feature_id):
     feature = Feature.query.get(feature_id)
     form = FeatureForm()
     form.title.data = feature.title

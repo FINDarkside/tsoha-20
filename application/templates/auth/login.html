@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% if error is defined %}
+<article class="message is-danger">
+    <div class="message-body">
+        {{ error }}
+    </div>
+</article>
+{% endif %}
+<form method="POST" action="{{ url_for('auth_login') }}">
+    <div class="field">
+        <label class="label">{{ form.username.label }}</label>
+        {{ form.username(class_="input") }}
+    </div>
+    <div class="field">
+        <label class="label">{{ form.password.label }}</label>
+        {{ form.password(class_="input") }}
+    </div>
+    <input class="button is-link" type="submit" value="Login" />
+</form>
+{% endblock %}
