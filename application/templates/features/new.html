@@ -3,12 +3,12 @@
 {% block body %}
 <form method="POST" action="{{ url_for('features_create') }}">
   <div class="field">
-    <label class="label">Title</label>
-    <input class="input" type="text" name="title" />
+    <label class="label">{{ form.title.label }}</label>
+    {{ form.title(class_="input") }}
   </div>
   <div class="field">
-    <label class="label">Description</label>
-    <textarea class="textarea" name="description"></textarea>
+    <label class="label">{{ form.title.label }}</label>
+    {{ form.description(class_="textarea") }}
   </div>
   <div class="field">
     <div class="control">

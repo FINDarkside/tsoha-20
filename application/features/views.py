@@ -1,6 +1,7 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
 from application.features.models import Feature
+from application.features.forms import FeatureForm
 
 @app.route("/features/", methods=["GET"])
 def features_index():
@@ -8,7 +9,7 @@ def features_index():
 
 @app.route("/features/new/", methods=["GET"])
 def features_form():
-    return render_template("features/new.html")
+    return render_template("features/new.html", form = FeatureForm())
 
 @app.route("/features/<feature_id>/edit", methods=["GET"])
 def feature_requests_form(feature_id):
@@ -25,11 +26,12 @@ def features_edit(feature_id):
 
 @app.route("/features/", methods=["POST"])
 def features_create():
-    f = Feature(request.form.get("title"),
-                       request.form.get("description"),
+    form = FeatureForm(request.form)
+    feature = Feature(form.title.data,
+                       form.description.data,
                        None)
 
-    db.session().add(f)
+    db.session().add(feature)
     db.session().commit()
 
     return redirect(url_for("features_index"))
