@@ -17,12 +17,17 @@ def features_form():
 @app.route("/features/<feature_id>/edit", methods=["GET"])
 def feature_requests_form(feature_id):
     feature = Feature.query.get(feature_id)
-    return render_template("features/edit.html", feature=feature)
+    form = FeatureForm()
+    form.title.data = feature.title
+    form.description.data = feature.description
+    return render_template("features/edit.html", form=form, feature_id=feature.id)
 
 
 @app.route("/features/<feature_id>/edit", methods=["POST"])
 def features_edit(feature_id):
     form = FeatureForm(request.form)
+    if not form.validate():
+        return render_template("features/edit.html", form=form, feature_id=feature_id)
     feature = Feature.query.get(feature_id)
 
     feature.title = form.title.data
