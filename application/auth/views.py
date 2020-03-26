@@ -13,6 +13,8 @@ def auth_login_form():
 @app.route("/auth/login", methods=["POST"])
 def auth_login():
     form = LoginForm(request.form)
+    if not form.validate():
+        return render_template("auth/login.html", form=form)
 
     user = User.query.filter_by(
         username=form.username.data, password=form.password.data).first()
