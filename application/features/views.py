@@ -18,9 +18,11 @@ def feature_requests_form(feature_id):
 
 @app.route("/features/<feature_id>/edit", methods=["POST"])
 def features_edit(feature_id):
-    f = Feature.query.get(feature_id)
-    f.title = request.form.get("title")
-    f.description = request.form.get("description")
+    form = FeatureForm(request.form)
+    feature = Feature.query.get(feature_id)
+
+    feature.title = form.title.data
+    feature.description = form.description.data
     db.session().commit()
     return redirect(url_for("features_index"))
 
