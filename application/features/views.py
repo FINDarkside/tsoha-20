@@ -2,6 +2,7 @@ from application import app, db
 from flask import redirect, render_template, request, url_for
 from application.features.models import Feature
 from application.features.forms import FeatureForm
+from flask_login import login_required
 
 
 @app.route("/features/", methods=["GET"])
@@ -10,11 +11,13 @@ def features_index():
 
 
 @app.route("/features/new/", methods=["GET"])
+@login_required
 def features_new_form():
     return render_template("features/new.html", form=FeatureForm())
 
 
 @app.route("/features/<feature_id>/edit", methods=["GET"])
+@login_required
 def features_edit_form(feature_id):
     feature = Feature.query.get(feature_id)
     form = FeatureForm()
@@ -24,6 +27,7 @@ def features_edit_form(feature_id):
 
 
 @app.route("/features/<feature_id>/edit", methods=["POST"])
+@login_required
 def features_edit(feature_id):
     form = FeatureForm(request.form)
     if not form.validate():
@@ -37,6 +41,7 @@ def features_edit(feature_id):
 
 
 @app.route("/features/", methods=["POST"])
+@login_required
 def features_create():
     form = FeatureForm(request.form)
     if not form.validate():
