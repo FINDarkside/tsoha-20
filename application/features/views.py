@@ -1,6 +1,6 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
-from application.features.models import Feature
+from application.features.models import Feature, Like
 from application.features.forms import FeatureForm
 from flask_login import login_required, current_user
 
@@ -56,10 +56,22 @@ def features_create():
 
     return redirect(url_for("features_index"))
 
+
 @app.route("/features/<feature_id>/delete", methods=["POST"])
 @login_required
 def features_delete(feature_id):
     feature = Feature.query.get(feature_id)
     db.session.delete(feature)
     db.session.commit()
+    return redirect(url_for("features_index"))
+
+
+@app.route("/features/<feature_id>/like", methods=["POST"])
+@login_required
+def features_like(feature_id):
+    print(current_user.id)
+    like = Like(feature_id, current_user.id)
+
+    db.session().add(like)
+    db.session().commit()
     return redirect(url_for("features_index"))

@@ -7,10 +7,14 @@
 <div>
     <span class="subtitle">{{ feature.title }}</span>
     <div>{{feature.description}}</div>
-    <div class="buttons">
-        <a class="button" href="{{ url_for('features_edit', feature_id=feature.id) }}">Edit</a>
-        <form action="{{ url_for('features_delete', feature_id=feature.id) }}" method="post">
-            <button type="submit" name="your_name" value="your_value" class="button is-danger">Delete</button>
+    <div>{{feature.like_count}} likes</div>
+    <div class="field is-grouped">
+        <a class="button control" href="{{ url_for('features_edit', feature_id=feature.id) }}">Edit</a>
+        <form class="control" action="{{ url_for('features_like', feature_id=feature.id) }}" method="post">
+            <button type="submit" class="button">Like</button>
+        </form>
+        <form class="control" action="{{ url_for('features_delete', feature_id=feature.id) }}" method="post">
+            <button type="submit" class="button is-danger">Delete</button>
         </form>
     </div>
     <hr>
