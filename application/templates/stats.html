@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1 class="title">Most active users</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Position</th>
+            <th>User</th>
+            <th>Feature requests created</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <th>{{ loop.index }}</th>
+            <td>{{ user.username }}</td>
+            <td>{{ user.feature_count }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
