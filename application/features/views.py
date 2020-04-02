@@ -2,7 +2,7 @@ from application import app, db
 from flask import redirect, render_template, request, url_for
 from application.features.models import Feature
 from application.features.forms import FeatureForm
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 
 @app.route("/features/", methods=["GET"])
@@ -49,7 +49,7 @@ def features_create():
 
     feature = Feature(form.title.data,
                       form.description.data,
-                      None)
+                      current_user.id)
 
     db.session().add(feature)
     db.session().commit()
