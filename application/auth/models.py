@@ -36,6 +36,7 @@ class User(Base):
         stmt = text("SELECT Account.id, Account.username, COUNT(*) AS feature_count FROM Account"
                     " LEFT JOIN Feature ON Feature.user_id = Account.id"
                     " GROUP BY Account.id"
+                    " ORDER BY feature_count DESC"
                     " LIMIT 10")
         res = db.engine.execute(stmt)
         response = []
