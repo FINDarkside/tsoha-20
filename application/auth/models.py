@@ -59,6 +59,7 @@ class User(Base):
 
 
 def init_users(*args, **kwargs):
+    # FIXME: Read password from env variable or remove this completely!
     db.session.add(User("admin", "pass", True))
     db.session.commit()
 
