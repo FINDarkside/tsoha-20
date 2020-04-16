@@ -1,6 +1,7 @@
 from application import db
 from application.models import Base
 from sqlalchemy import func
+from flask_login import current_user
 
 
 class Feature(Base):
@@ -16,6 +17,10 @@ class Feature(Base):
     @property
     def like_count(self):
         return db.session.query(Feature.id).outerjoin(Like).filter_by(feature_id=self.id).count()
+
+    @property
+    def authorized_to_modify(self):
+        return current_user.is_admin or current_user.id == self.user_id
 
 
 class Like(Base):

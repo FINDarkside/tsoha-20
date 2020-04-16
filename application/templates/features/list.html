@@ -9,13 +9,17 @@
     <div>{{feature.description}}</div>
     <div>{{feature.like_count}} likes</div>
     <div class="field is-grouped">
-        <a class="button control" href="{{ url_for('features_edit', feature_id=feature.id) }}">Edit</a>
+        {% if current_user.is_authenticated %}
         <form class="control" action="{{ url_for('features_like', feature_id=feature.id) }}" method="post">
             <button type="submit" class="button">Like</button>
         </form>
+        {% endif %}
+        {% if feature.authorized_to_modify %}
+        <a class="button control" href="{{ url_for('features_edit', feature_id=feature.id) }}">Edit</a>
         <form class="control" action="{{ url_for('features_delete', feature_id=feature.id) }}" method="post">
             <button type="submit" class="button is-danger">Delete</button>
         </form>
+        {% endif %}
     </div>
     <hr>
 </div>

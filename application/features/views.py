@@ -20,7 +20,7 @@ def features_new_form():
 @login_required
 def features_edit_form(feature_id):
     feature = Feature.query.get(feature_id)
-    if(not current_user.is_admin and feature.user_id != current_user.id):
+    if(not feature.authorized_to_modify):
         return render_template("error.html", error="Unauthorized")
     form = FeatureForm()
     form.title.data = feature.title
@@ -36,7 +36,7 @@ def features_edit(feature_id):
         return render_template("features/edit.html", form=form, feature_id=feature_id)
     feature = Feature.query.get(feature_id)
 
-    if(not current_user.is_admin and feature.user_id != current_user.id):
+    if(not feature.authorized_to_modify):
         return render_template("error.html", error="Unauthorized")
 
     feature.title = form.title.data
@@ -66,7 +66,7 @@ def features_create():
 @login_required
 def features_delete(feature_id):
     feature = Feature.query.get(feature_id)
-    if(not current_user.is_admin and feature.user_id != current_user.id):
+    if(not feature.authorized_to_modify):
         return render_template("error.html", error="Unauthorized")
     db.session.delete(feature)
     db.session.commit()
