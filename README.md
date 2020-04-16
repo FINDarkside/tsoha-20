@@ -12,4 +12,4 @@ Admin testitunnus:
 
 Normaalin käyttäjän testitunnus:
 * Käyttäjänimi: testi 
-* Salasana: testi
+* Salasana: testisalis
