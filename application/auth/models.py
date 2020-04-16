@@ -42,9 +42,9 @@ class User(Base):
 
     @staticmethod
     def find_users_with_most_features():
-        stmt = text("SELECT Account.id, Account.username, COUNT(*) AS feature_count FROM Account"
-                    " LEFT JOIN Feature ON Feature.user_id = Account.id"
-                    " GROUP BY Account.id"
+        stmt = text("SELECT Account.id, Account.username, COUNT(*) AS feature_count FROM Feature"
+                    " LEFT JOIN Account ON Account.id = Feature.user_id"
+                    " GROUP BY Feature.user_id"
                     " ORDER BY feature_count DESC"
                     " LIMIT 10")
         res = db.engine.execute(stmt)
