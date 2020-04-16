@@ -1,5 +1,6 @@
 from application import db
 from application.models import Base
+from sqlalchemy import event
 from sqlalchemy.sql import text
 
 
@@ -14,10 +15,12 @@ class User(Base):
 
     username = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
+    is_admin = db.Column(db.Boolean, nullable=False)
 
-    def __init__(self, username, password):
+    def __init__(self, username, password, is_admin=False):
         self.username = username
         self.password = password
+        self.is_admin = is_admin
 
     def get_id(self):
         return self.id
@@ -30,6 +33,12 @@ class User(Base):
 
     def is_authenticated(self):
         return True
+
+    def roles(self):
+        if(self.is_admin):
+            return ["ADMIN"]
+        else:
+            return []
 
     @staticmethod
     def find_users_with_most_features():
@@ -47,3 +56,11 @@ class User(Base):
                 "feature_count": row[2]
             })
         return response
+
+
+def init_users(*args, **kwargs):
+    db.session.add(User("admin", "pass", True))
+    db.session.commit()
+
+
+event.listen(User.__table__, 'after_create', init_users)
