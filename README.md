@@ -2,7 +2,11 @@
 
 [Sovellus herokussa](https://findarkside-tsoha20.herokuapp.com/features/)
 
-Testitunnukset: 
+Admin testitunnus: 
+* Käyttäjänimi: admin 
+* Salasana: pass
+
+Normaalin käyttäjän testitunnus:
 * Käyttäjänimi: testi 
 * Salasana: testi
 
