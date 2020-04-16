@@ -1,4 +1,4 @@
-# TBD
+# feature-suggestion-app
 
 [Sovellus herokussa](https://findarkside-tsoha20.herokuapp.com/features/)
 
