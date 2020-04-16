@@ -5,8 +5,8 @@ from sqlalchemy import func
 
 class Feature(Base):
     user_id = db.Column(db.Integer, nullable=True)
-    title = db.Column(db.String(144), nullable=False)
-    description = db.Column(db.String(144), nullable=False)
+    title = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
 
     def __init__(self, title, description, userId):
         self.title = title

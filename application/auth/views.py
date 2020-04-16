@@ -1,7 +1,7 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for
 from application.auth.models import User
-from application.auth.forms import LoginForm
+from application.auth.forms import LoginForm, RegisterForm
 from flask_login import login_user, logout_user, login_required
 
 
@@ -36,14 +36,14 @@ def auth_logout():
 
 @app.route("/auth/register", methods=["GET"])
 def auth_register_form():
-    return render_template("auth/register.html", form=LoginForm())
+    return render_template("auth/register.html", form=RegisterForm())
 
 
 @app.route("/auth/register", methods=["POST"])
 def auth_register():
-    form = LoginForm(request.form)
+    form = RegisterForm(request.form)
     if not form.validate():
-        return render_template("auth/register", form=form)
+        return render_template("auth/register.html", form=form)
     print(form.password.data)
     user = User(form.username.data, form.password.data)
     db.session().add(user)

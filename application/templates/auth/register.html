@@ -14,10 +14,20 @@
         <label class="label">{{ form.username.label }}</label>
         {{ form.username(class_="input") }}
     </div>
+    {% for error in form.username.errors %}
+    <div>
+        {{ error }}
+    </div>
+    {% endfor %}
     <div class="field">
         <label class="label">{{ form.password.label }}</label>
         {{ form.password(class_="input") }}
     </div>
+    {% for error in form.password.errors %}
+    <div>
+        {{ error }}
+    </div>
+    {% endfor %}
     <input class="button is-link" type="submit" value="Register" />
 </form>
 {% endblock %}

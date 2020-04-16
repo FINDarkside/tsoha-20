@@ -12,8 +12,8 @@ class User(Base):
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
                               onupdate=db.func.current_timestamp())
 
-    username = db.Column(db.String(144), nullable=False)
-    password = db.Column(db.String(144), nullable=False)
+    username = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
 
     def __init__(self, username, password):
         self.username = username
