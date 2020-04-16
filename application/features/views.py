@@ -76,8 +76,19 @@ def features_delete(feature_id):
 @app.route("/features/<feature_id>/like", methods=["POST"])
 @login_required
 def features_like(feature_id):
-    like = Like(feature_id, current_user.id)
+    feature = Feature.query.get(feature_id)
+    if(not feature.current_user_liked):
+        like = Like(feature_id, current_user.id)
+        db.session().add(like)
+        db.session().commit()
+    return redirect(url_for("features_index"))
 
-    db.session().add(like)
-    db.session().commit()
+@app.route("/features/<feature_id>/unlike", methods=["POST"])
+@login_required
+def features_unlike(feature_id):
+    feature = Feature.query.get(feature_id)
+    if(feature.current_user_liked):
+        like = db.session.query(Like).filter_by(user_id=current_user.id, feature_id=feature_id).first()
+        db.session().delete(like)
+        db.session().commit()
     return redirect(url_for("features_index"))

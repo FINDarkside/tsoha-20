@@ -31,6 +31,11 @@ class Feature(Base):
     def authorized_to_modify(self):
         return current_user.is_admin or current_user.id == self.user_id
 
+    @property
+    def current_user_liked(self):
+        count = db.session.query(Like).filter_by(user_id=current_user.id, feature_id=self.id).count()
+        return count > 0
+
 
 Feature.like_count = column_property(
     select([func.count(Like.id)]).
