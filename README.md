@@ -5,6 +5,7 @@
 * [Aiheen kuvaus](/dokumentaatio/kuvaus.md)
 * [Tietokantakaavio](/dokumentaatio/tietokanta.png)
 * [Käyttäjätarinat](/dokumentaatio/käyttäjätarinat.md)
+* [Asennusohje](/dokumentaatio/asennusohje.md)
 
 Admin testitunnus: 
 * Käyttäjänimi: admin 
