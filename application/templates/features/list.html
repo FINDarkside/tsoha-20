@@ -3,6 +3,16 @@
 {% block body %}
 
 <h1 class="title">Feature request</h1>
+<div>
+    Category:
+    {% for category in categories %}
+    <a href="{{ url_for('features_index', category=category.name) }}">
+        <span class="tag {{'is-primary' if category==current_category else 'is-light' }} is-medium">
+            {{ category.name }}
+        </span>
+    </a>
+    {% endfor %}
+</div>
 {% for feature in features %}
 <div>
     <span class="subtitle">{{ feature.title }}</span>
