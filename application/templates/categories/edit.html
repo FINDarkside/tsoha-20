@@ -15,16 +15,21 @@
 <hr>
 {% for category in categories %}
 <div>
-    <form method="POST" action="{{ url_for('categories_edit', category_id=category.id) }}">
-        <div class="field has-addons">
+    <div class="field has-addons">
+        <form method="POST" class="field has-addons" action="{{ url_for('categories_edit', category_id=category.id) }}">
             <div class="control">
                 <input class="input" type="text" name="name" value="{{ category.name }}">
             </div>
             <div class="control">
                 <button class="button is-link" type="submit" value="Submit">Save</button>
             </div>
-        </div>
-    </form>
+        </form>
+        <form method="POST" action="{{ url_for('categories_delete', category_id=category.id) }}">
+            <div class="control">
+                <button class="button is-danger" type="submit" value="Submit">Delete</button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endfor %}
 

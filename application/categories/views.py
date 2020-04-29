@@ -57,3 +57,14 @@ def categories_create():
     db.session().commit()
     
     return redirect(url_for("categories_edit_form"))
+
+@app.route("/categories/<category_id>/delete", methods=["POST"])
+@login_required
+def categories_delete(category_id):
+    if not current_user.is_admin:
+        return render_template("error.html", error="Unauthorized")
+
+    category = FeatureCategory.query.get(category_id)
+    db.session.delete(category)
+    db.session.commit()
+    return redirect(url_for("categories_edit_form"))
