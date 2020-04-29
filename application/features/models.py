@@ -56,8 +56,8 @@ Feature.like_count = column_property(
 
 def init_categories(*args, **kwargs):
     # FIXME: Read password from env variable or remove this completely!
-    db.session.add(FeatureCategory("Open"))
-    db.session.add(FeatureCategory("Done"))
+    db.session.add(FeatureCategory("open"))
+    db.session.add(FeatureCategory("done"))
     db.session.commit()
 
 
