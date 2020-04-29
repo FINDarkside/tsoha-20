@@ -5,6 +5,7 @@ from application.categories.models import FeatureCategory
 from application.features.forms import FeatureForm
 from flask_login import login_required, current_user
 
+features_per_page = 10
 
 @app.route("/features/", methods=["GET"])
 def features_index():
@@ -23,7 +24,7 @@ def features_index():
     if(current_category == None):
         return render_template("error.html", error="Invalid feature category")
 
-    features = Feature.query.filter_by(category_id=current_category.id).all()
+    features = Feature.get_paginated(0, features_per_page, current_category.id)
 
     return render_template("features/list.html", features=features, categories=categories, current_category=current_category)
 
