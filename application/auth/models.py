@@ -13,7 +13,7 @@ class User(Base):
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
                               onupdate=db.func.current_timestamp())
 
-    username = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False, index=True)
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, nullable=False)
 

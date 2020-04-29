@@ -9,9 +9,9 @@ from application.categories.models import FeatureCategory
 
 class Like(Base):
     user_id = db.Column(db.Integer, db.ForeignKey(
-        'account.id'), nullable=False)
+        'account.id'), nullable=False, index=True)
     feature_id = db.Column(db.Integer, db.ForeignKey(
-        'feature.id'), nullable=False)
+        'feature.id'), nullable=False, index=True)
 
     def __init__(self, feature_id, user_id):
         self.feature_id = feature_id
@@ -21,7 +21,7 @@ class Feature(Base):
     user_id = db.Column(db.Integer, nullable=True)
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey(FeatureCategory.id))
+    category_id = db.Column(db.Integer, db.ForeignKey(FeatureCategory.id), index=True)
     category = db.relationship("FeatureCategory", foreign_keys=[category_id], lazy='joined')
 
     def __init__(self, title, description, userId):
