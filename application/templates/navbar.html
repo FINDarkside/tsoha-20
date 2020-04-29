@@ -23,6 +23,11 @@
             <a class="navbar-item" href="{{url_for('stats')}}">
                 Stats
             </a>
+            {% if current_user.is_authenticated and current_user.is_admin %}
+            <a class="navbar-item" href="{{url_for('categories_edit_form')}}">
+                Edit categories
+            </a>
+            {% endif %}
         </div>
 
         <div class="navbar-end">

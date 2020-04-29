@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('features_edit', feature_id=feature_id)}}">
+<form method="POST" action="{{ url_for('features_edit', feature_id=feature_id) }}">
     <div class="field">
         <label class="label">{{ form.title.label }}</label>
         {{ form.title(class_="input") }}

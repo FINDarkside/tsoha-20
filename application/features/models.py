@@ -4,6 +4,7 @@ from sqlalchemy import func, select, event
 from sqlalchemy.orm import column_property
 from sqlalchemy.sql import and_
 from flask_login import current_user
+from application.categories.models import FeatureCategory
 
 
 class Like(Base):
@@ -15,14 +16,6 @@ class Like(Base):
     def __init__(self, feature_id, user_id):
         self.feature_id = feature_id
         self.user_id = user_id
-
-
-class FeatureCategory(Base):
-    name = db.Column(db.String, nullable=False)
-
-    def __init__(self, name):
-        self.name = name
-
 
 class Feature(Base):
     user_id = db.Column(db.Integer, nullable=True)
@@ -52,13 +45,3 @@ Feature.like_count = column_property(
     select([func.count(Like.id)]).
     where(Like.feature_id == Feature.id)
 )
-
-
-def init_categories(*args, **kwargs):
-    # FIXME: Read password from env variable or remove this completely!
-    db.session.add(FeatureCategory("open"))
-    db.session.add(FeatureCategory("done"))
-    db.session.commit()
-
-
-event.listen(FeatureCategory.__table__, 'after_create', init_categories)
