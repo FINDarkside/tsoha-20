@@ -1,6 +1,7 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
-from application.features.models import Feature, Like, FeatureCategory
+from application.features.models import Feature, Like
+from application.categories.models import FeatureCategory
 from application.features.forms import FeatureForm
 from flask_login import login_required, current_user
 
@@ -11,7 +12,7 @@ def features_index():
     category_name = request.args.get("category") or categories[0].name
 
     current_category = None
-    for category in categories: 
+    for category in categories:
         if category.name == category_name:
             current_category = category
             break
@@ -39,7 +40,9 @@ def features_edit_form(feature_id):
     form = FeatureForm()
     form.title.data = feature.title
     form.description.data = feature.description
-    return render_template("features/edit.html", form=form, feature_id=feature.id)
+
+    categories = FeatureCategory.get_all()
+    return render_template("features/edit.html", form=form, feature=feature, categories=categories)
 
 
 @app.route("/features/<feature_id>/edit", methods=["POST"])
@@ -47,11 +50,17 @@ def features_edit_form(feature_id):
 def features_edit(feature_id):
     form = FeatureForm(request.form)
     if not form.validate():
-        return render_template("features/edit.html", form=form, feature_id=feature_id)
+        return render_template("features/edit.html", form=form, feature_id=feature_id, categories=FeatureCategory.get_all())
     feature = Feature.query.get(feature_id)
 
-    if(not feature.authorized_to_modify):
+    if not feature.authorized_to_modify:
         return render_template("error.html", error="Unauthorized")
+
+    if current_user.is_admin and request.form.get('category'):
+        category = FeatureCategory.query.get(request.form.get('category'))
+        if not category:
+            return render_template("error.html", error="Invalid category")
+        feature.category_id = category.id
 
     feature.title = form.title.data
     feature.description = form.description.data

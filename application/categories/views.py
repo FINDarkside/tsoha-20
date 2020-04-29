@@ -10,7 +10,7 @@ from flask_login import login_required, current_user
 def categories_edit_form():
     if not current_user.is_admin:
         return render_template("error.html", error="Unauthorized")
-    categories = FeatureCategory.query.order_by(FeatureCategory.id).all()
+    categories = FeatureCategory.get_all()
     return render_template("categories/edit.html", categories=categories)
 
 
@@ -24,7 +24,7 @@ def categories_edit(category_id):
     if(not category):
         return render_template("error.html", error="Category not found")
 
-    categories = FeatureCategory.query.order_by(FeatureCategory.id).all()
+    categories = FeatureCategory.get_all()
 
     new_name = request.form.get('name')
     if(not isinstance(new_name, str) or len(new_name) < 3):

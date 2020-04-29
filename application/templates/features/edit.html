@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('features_edit', feature_id=feature_id) }}">
+<form method="POST" action="{{ url_for('features_edit', feature_id=feature.id) }}">
     <div class="field">
         <label class="label">{{ form.title.label }}</label>
         {{ form.title(class_="input") }}
@@ -20,6 +20,22 @@
         {{ error }}
     </div>
     {% endfor %}
+
+    {% if current_user.is_admin %}
+    <div class="field">
+        <label class="label">Category </label>
+        <div class="select">
+            <select name="category">
+                {% for category in categories %}
+                <option value="{{ category.id }}" {{ 'selected' if category.id==feature.category_id }}>
+                    {{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    {% endif %}
+
     <div class="field">
         <div class="control">
             <button class="button is-link" type="submit" value="Submit">Submit</button>
