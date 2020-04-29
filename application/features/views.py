@@ -9,18 +9,21 @@ from flask_login import login_required, current_user
 @app.route("/features/", methods=["GET"])
 def features_index():
     categories = FeatureCategory.query.all()
-    category_name = request.args.get("category") or categories[0].name
 
     current_category = None
-    for category in categories:
-        if category.name == category_name:
-            current_category = category
-            break
+    if(request.args.get("category")):
+        param_category_id = int(request.args.get("category"))
+        for category in categories:
+            if category.id == param_category_id:
+                current_category = category
+                break
+    else:
+        current_category = categories[0]
 
     if(current_category == None):
         return render_template("error.html", error="Invalid feature category")
 
-    features = Feature.query.filter_by(category_id=category.id).all()
+    features = Feature.query.filter_by(category_id=current_category.id).all()
 
     return render_template("features/list.html", features=features, categories=categories, current_category=current_category)
 
