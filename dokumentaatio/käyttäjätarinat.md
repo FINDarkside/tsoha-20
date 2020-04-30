@@ -49,15 +49,15 @@ VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %(user_id)s, %(feature_id)s)
 RETURNING "like".id
 ```
 * Rekisteröityneenä käyttäjänä voin poistaa ääneni ehdotukselta
-```
+```SQL
 DELETE FROM "like" WHERE "like".id = %(id)s
 ```
 * Ylläpitäjänä voin poistaa ehdotuksen
-```
+```SQL
 DELETE FROM feature WHERE feature.id = %(id)s
 ```
 * Ylläpitäjänä voin vaihtaa ehdotuksen kategoriaa
-```
+```SQL
 UPDATE feature 
 SET date_modified=CURRENT_TIMESTAMP, category_id=%(category_id)s 
 WHERE feature.id = %(feature_id)s
