@@ -21,25 +21,41 @@
     <div>{{feature.like_count}} likes</div>
     <div class="field is-grouped">
         {% if current_user.is_authenticated %}
-        {% if not feature.current_user_liked %}
-        <form class="control" action="{{ url_for('features_like', feature_id=feature.id) }}" method="post">
-            <button type="submit" class="button">Like</button>
-        </form>
-        {% else %}
-        <form class="control" action="{{ url_for('features_unlike', feature_id=feature.id) }}" method="post">
-            <button type="submit" class="button">Unlike</button>
-        </form>
-        {% endif %}
+            {% if not feature.current_user_liked %}
+                <form class="control" action="{{ url_for('features_like', feature_id=feature.id) }}" method="post">
+                    <button type="submit" class="button">Like</button>
+                </form>
+            {% else %}
+                <form class="control" action="{{ url_for('features_unlike', feature_id=feature.id) }}" method="post">
+                    <button type="submit" class="button">Unlike</button>
+                </form>
+            {% endif %}
         {% endif %}
         {% if feature.authorized_to_modify %}
-        <a class="button control" href="{{ url_for('features_edit', feature_id=feature.id) }}">Edit</a>
-        <form class="control" action="{{ url_for('features_delete', feature_id=feature.id) }}" method="post">
-            <button type="submit" class="button is-danger">Delete</button>
-        </form>
+            <a class="button control" href="{{ url_for('features_edit', feature_id=feature.id) }}">Edit</a>
+            <form class="control" action="{{ url_for('features_delete', feature_id=feature.id) }}" method="post">
+                <button type="submit" class="button is-danger">Delete</button>
+            </form>
         {% endif %}
     </div>
     <hr>
 </div>
 {% endfor %}
+
+<nav class="pagination" role="navigation">
+    <ul class="pagination-list">
+        {% for page_num in page_nums %}
+            {% if page_num - page_nums[loop.index - 2] > 1 %}
+                <li> <span class="pagination-ellipsis">&hellip;</span> </li>
+            {% endif %}
+            <li>
+                <a class="pagination-link {{ 'is-current' if current_page == page_num }}"
+                    href="{{ url_for('features_index', page=page_num) }}">{{ page_num }}</a>
+            </li>
+        {% endfor %}
+        
+    </ul>
+</nav>
+
 
 {% endblock %}

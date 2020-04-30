@@ -4,8 +4,10 @@ from application.features.models import Feature, Like
 from application.categories.models import FeatureCategory
 from application.features.forms import FeatureForm
 from flask_login import login_required, current_user
+from math import ceil
 
-features_per_page = 10
+features_per_page = 5
+
 
 @app.route("/features/", methods=["GET"])
 def features_index():
@@ -24,9 +26,23 @@ def features_index():
     if(current_category == None):
         return render_template("error.html", error="Invalid feature category")
 
-    features = Feature.get_paginated(0, features_per_page, current_category.id)
+    feature_count = Feature.count_by_category(current_category.id)
+    total_pages = int(ceil(feature_count / features_per_page))
+    current_page = int(request.args.get("page") or 1)
+    features = Feature.get_paginated(current_page, features_per_page, current_category.id)
 
-    return render_template("features/list.html", features=features, categories=categories, current_category=current_category)
+    page_nums = []
+    for i in range(max(current_page - 1, 1), current_page + 2):
+        if(i > total_pages):
+            break
+        page_nums.append(i)
+    if(len(page_nums) == 0 or page_nums[0] != 1):
+        page_nums.insert(0, 1)
+    if(total_pages > page_nums[-1]):
+        page_nums.append(total_pages)
+
+    return render_template("features/list.html", features=features, categories=categories, current_category=current_category,
+                           page_nums=page_nums, current_page=current_page)
 
 
 @app.route("/features/new/", methods=["GET"])
@@ -78,7 +94,7 @@ def features_create():
     form = FeatureForm(request.form)
     if not form.validate():
         return render_template("features/new.html", form=form)
-
+    
     feature = Feature(form.title.data,
                       form.description.data,
                       current_user.id)

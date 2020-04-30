@@ -31,7 +31,7 @@ class Feature(Base):
         self.title = title
         self.description = description
         self.user_id = userId
-        self.category_id = 1
+        self.category_id = FeatureCategory.get_first().id
 
     @property
     def authorized_to_modify(self):
@@ -44,10 +44,14 @@ class Feature(Base):
         return count > 0
 
     @staticmethod
+    def count_by_category(category_id):
+        return Feature.query.filter_by(category_id=category_id).count()
+
+    @staticmethod
     def get_paginated(page_num, page_size, category_id):
-        skip_count = page_num * page_size
+        skip_count = (page_num - 1) * page_size
         stmt = text(""" 
-                    SELECT Feature.*, COUNT(*) AS like_count,
+                    SELECT Feature.*,
                         (SELECT COUNT(*)
                            FROM Like
                            WHERE feature_id=Feature.id) AS like_count,

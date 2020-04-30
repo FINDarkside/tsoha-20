@@ -16,6 +16,10 @@ class FeatureCategory(Base):
     def get_all():
         return FeatureCategory.query.order_by(FeatureCategory.id).all()
 
+    @staticmethod
+    def get_first():
+        return FeatureCategory.query.order_by(FeatureCategory.id).first()
+
 
 def init_categories(*args, **kwargs):
     # FIXME: Read password from env variable or remove this completely!
