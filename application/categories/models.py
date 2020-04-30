@@ -7,6 +7,7 @@ from sqlalchemy.sql import and_, text
 
 class FeatureCategory(Base):
     name = db.Column(db.String, nullable=False)
+    feature = db.relationship("Feature", cascade="all,delete")
 
     def __init__(self, name):
         self.name = name
