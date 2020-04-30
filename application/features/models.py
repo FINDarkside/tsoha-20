@@ -75,7 +75,10 @@ class Feature(Base):
             feature = {}
             for i, key in enumerate(keys):
                 feature[key] = row[i]
-            feature["authorized_to_modify"] = current_user.is_admin or feature.user_id == current_user.id
+            if(current_user.is_authenticated):
+                feature["authorized_to_modify"] = current_user.is_admin or feature.user_id == current_user.id
+            else:
+                feature["authorized_to_modify"] = False
             response.append(feature)
 
         return response
