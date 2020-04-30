@@ -1,4 +1,12 @@
-# CEATE TABLE kyselyt
+# Tietokanta
+
+## Tietokantakaavio
+
+<img src="./tietokanta.png">
+
+## CEATE TABLE kyselyt
+
+### Account
 
 ```SQL
 
@@ -19,7 +27,7 @@ CREATE INDEX ix_account_username
     TABLESPACE pg_default;
 ```
 
-## Feature
+### Feature
 
 ```SQL
 CREATE TABLE public.feature
@@ -44,7 +52,7 @@ CREATE INDEX ix_feature_category_id
     TABLESPACE pg_default;
 ```
 
-## FeatureCategory
+### FeatureCategory
 
 ```SQL
 CREATE TABLE public.feature_category
@@ -57,7 +65,7 @@ CREATE TABLE public.feature_category
 )
 ```
 
-## Like
+### Like
 
 ```SQL
 CREATE TABLE public."like"
