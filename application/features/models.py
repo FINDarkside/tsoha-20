@@ -50,6 +50,7 @@ class Feature(Base):
     @staticmethod
     def get_paginated(page_num, page_size, category_id):
         skip_count = (page_num - 1) * page_size
+        current_user_id = -1 if not current_user.is_authenticated else current_user.id
         stmt = text(""" 
                     SELECT Feature.*,
                         (SELECT COUNT(*)
@@ -63,7 +64,7 @@ class Feature(Base):
                     ORDER BY like_count DESC
                     LIMIT :page_size
                     OFFSET :skip_count
-                    """).params(current_user=current_user.id, category_id=category_id, skip_count=skip_count, page_size=page_size)
+                    """).params(current_user=current_user_id, category_id=category_id, skip_count=skip_count, page_size=page_size)
         res = db.engine.execute(stmt)
         response = []
         keys = res.keys()
