@@ -6,6 +6,7 @@
 * [Tietokanta](/dokumentaatio/tietokanta.md)
 * [Käyttäjätarinat](/dokumentaatio/käyttäjätarinat.md)
 * [Asennusohje](/dokumentaatio/asennusohje.md)
+* [Käyttöohje](/dokumentaatio/käyttöohje.md)
 
 Admin testitunnus: 
 * Käyttäjänimi: admin 
