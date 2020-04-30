@@ -54,10 +54,10 @@ class Feature(Base):
         stmt = text(""" 
                     SELECT Feature.*,
                         (SELECT COUNT(*)
-                           FROM Like
+                           FROM "like"
                            WHERE feature_id=Feature.id) AS like_count,
                         (SELECT COUNT(*)
-                            FROM Like
+                            FROM "like"
                             WHERE feature_id=Feature.id AND user_id=:current_user ) AS current_user_liked
                     FROM Feature
                     WHERE category_id=:category_id
