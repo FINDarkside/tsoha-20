@@ -21,4 +21,22 @@
         {% endfor %}
     </tbody>
 </table>
+
+<h1 class="title">Feature counts by category</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Feature count</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in category_stats %}
+        <tr>
+            <td>{{ category.name }}</td>
+            <td>{{ category.feature_count }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
