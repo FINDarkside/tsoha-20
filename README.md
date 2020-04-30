@@ -7,6 +7,7 @@
 * [Käyttäjätarinat](/dokumentaatio/käyttäjätarinat.md)
 * [Asennusohje](/dokumentaatio/asennusohje.md)
 * [Käyttöohje](/dokumentaatio/käyttöohje.md)
+* [Sovelluksen tila](/dokumentaatio/sovelluksenTila.md)
 
 Admin testitunnus: 
 * Käyttäjänimi: admin 
