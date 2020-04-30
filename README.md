@@ -3,7 +3,7 @@
 [Sovellus herokussa](https://findarkside-tsoha20.herokuapp.com/features/)
 
 * [Aiheen kuvaus](/dokumentaatio/kuvaus.md)
-* [Tietokantakaavio](/dokumentaatio/tietokanta.png)
+* [Tietokanta](/dokumentaatio/tietokanta.md)
 * [Käyttäjätarinat](/dokumentaatio/käyttäjätarinat.md)
 * [Asennusohje](/dokumentaatio/asennusohje.md)
 
