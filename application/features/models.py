@@ -60,6 +60,7 @@ class Feature(Base):
                             WHERE feature_id=Feature.id AND user_id=:current_user ) AS current_user_liked
                     FROM Feature
                     WHERE category_id=:category_id
+                    ORDER BY like_count DESC
                     LIMIT :page_size
                     OFFSET :skip_count
                     """).params(current_user=current_user.id, category_id=category_id, skip_count=skip_count, page_size=page_size)
