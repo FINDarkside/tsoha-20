@@ -43,4 +43,4 @@ def init_categories(*args, **kwargs):
     db.session.commit()
 
 
-event.listen(FeatureCategory.__table__, 'after_create', init_categories)
+event.listen(FeatureCategory.__table__, "after_create", init_categories)

@@ -46,7 +46,7 @@ def auth_register():
         return render_template("auth/register.html", form=form)
     print(form.password.data)
     password_hash = bcrypt.generate_password_hash(
-        form.password.data).decode('utf-8')
+        form.password.data).decode("utf-8")
     user = User(form.username.data, password_hash)
     db.session().add(user)
     db.session().commit()

@@ -63,4 +63,4 @@ def init_users(*args, **kwargs):
     db.session.commit()
 
 
-event.listen(User.__table__, 'after_create', init_users)
+event.listen(User.__table__, "after_create", init_users)

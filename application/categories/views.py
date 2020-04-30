@@ -26,7 +26,7 @@ def categories_edit(category_id):
 
     categories = FeatureCategory.get_all()
 
-    new_name = request.form.get('name')
+    new_name = request.form.get("name")
     if(not isinstance(new_name, str) or len(new_name) < 3):
         return render_template("categories/edit.html", categories=categories, error="Category name must be at least 3 characters long")
     if(len(new_name) > 20):
@@ -46,7 +46,7 @@ def categories_create():
 
     categories = FeatureCategory.get_all()
 
-    name = request.form.get('name')
+    name = request.form.get("name")
     if(not isinstance(name, str) or len(name) < 3):
         return render_template("categories/edit.html", categories=categories, error="Category name must be at least 3 characters long")
     if(len(name) > 20):

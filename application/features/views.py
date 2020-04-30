@@ -76,8 +76,8 @@ def features_edit(feature_id):
     if not feature.authorized_to_modify:
         return render_template("error.html", error="Unauthorized")
 
-    if current_user.is_admin and request.form.get('category'):
-        category = FeatureCategory.query.get(request.form.get('category'))
+    if current_user.is_admin and request.form.get("category"):
+        category = FeatureCategory.query.get(request.form.get("category"))
         if not category:
             return render_template("error.html", error="Invalid category")
         feature.category_id = category.id
